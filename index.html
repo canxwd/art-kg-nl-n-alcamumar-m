@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senden Özür Dilerim ❤</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: #ff9ecb;
+    }
+
+    /* Arka plan fotoğrafı */
+    .bg {
+        position: fixed;
+        inset: 0;
+        background: url("biz.jpg") center/cover no-repeat;
+        filter: brightness(0.45) blur(3px);
+        z-index: -3;
+    }
+
+    /* Pembe parıltı layer */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,0,128,0.35), rgba(255,200,220,0.35));
+        z-index: -2;
+        mix-blend-mode: screen;
+        animation: glow 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        from { opacity: 0.5; }
+        to { opacity: 0.9; }
+    }
+
+    .container {
+        z-index: 3;
+        background: rgba(255, 230, 240, 0.70);
+        padding: 35px;
+        border-radius: 25px;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        box-shadow: 0 0 45px rgba(255, 0, 102, 0.45);
+        backdrop-filter: blur(5px);
+        animation: fadeIn 1.2s ease-out;
+        border: 2px solid rgba(255,50,140,0.4);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #8b0050;
+        animation: pulseText 2s infinite alternate;
+    }
+
+    @keyframes pulseText {
+        from { transform: scale(1); }
+        to { transform: scale(1.05); }
+    }
+
+    .sub {
+        font-size: 18px;
+        color: #7a004f;
+        margin-bottom: 22px;
+        text-shadow: 0 0 6px rgba(255,150,190,0.5);
+    }
+
+    button {
+        padding: 14px 25px;
+        border: none;
+        border-radius: 14px;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.25s;
+        font-weight: bold;
+    }
+
+    #yesBtn {
+        background: linear-gradient(135deg, #ff2a8a, #ff66b0);
+        color: white;
+        box-shadow: 0 0 15px #ff2a8a;
+        animation: yesAnim 1.5s infinite alternate;
+    }
+
+    @keyframes yesAnim {
+        from { transform: scale(1); }
+        to { transform: scale(1.08); }
+    }
+
+    #noBtn {
+        background: #ffe1ed;
+        color: #7a004f;
+        border: 2px solid #ff2a8a;
+        box-shadow: 0 0 10px rgba(255,100,150,0.4);
+    }
+
+    #noBtn:hover {
+        background: #ffcae1;
+        transform: scale(1.05);
+    }
+
+    #msg {
+        margin-top: 22px;
+        font-size: 19px;
+        min-height: 40px;
+        color: #6a0035;
+        font-weight: bold;
+        animation: msgAnim 0.4s ease;
+    }
+
+    @keyframes msgAnim {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Kalp yağmuru */
+    .heart {
+        position: fixed;
+        color: #ff007f;
+        font-size: 22px;
+        animation: fall 4s linear forwards;
+        z-index: 10;
+        text-shadow: 0 0 10px rgba(255,0,128,0.8);
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(120vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<div class="container">
+    <h1>Özür Dilerim Aşkım… 💔</h1>
+    <div class="sub">Seni istemeden kırdım… Affeder misin? 💗</div>
+
+    <button id="yesBtn">Evet ❤</button>
+    <button id="noBtn">Hayır 💔</button>
+
+    <div id="msg"></div>
+</div>
+
+<script>
+let noClicks = 0;
+
+document.getElementById("yesBtn").onclick = function () {
+    document.getElementById("msg").innerHTML =
+        "O zaman… Yazışmaya devam edelim birtanem ❤💋 Seni çok seviyorum.";
+    rainHearts();
+};
+
+document.getElementById("noBtn").onclick = function () {
+    noClicks++;
+
+    let messages = [
+        "Aşkım lütfen… 😢",
+        "Gerçekten çok üzgünüm, nolur affet… 💔",
+        "Kalbim sıkışıyor böyle… 😭",
+        "Hadi ama güzelim… beni sensiz bırakma 💗",
+        "Sana kıyamam… nolur bana da kıyma 😞",
+        "Pes etmiyorum çünkü seni seviyorum 💕",
+        "Hâlâ hayır mı…? İçimi acıtıyorsun 😣",
+        "Son kez söylüyorum… Affet beni aşkım 🙏💖",
+        "Tamam… ama bil ki her saniye seni düşünüyorum… ❤"
+    ];
+
+    document.getElementById("msg").innerHTML =
+        messages[Math.min(noClicks - 1, messages.length - 1)];
+
+    shake();
+};
+
+/* Kalp yağmuru */
+function rainHearts() {
+    for (let i = 0; i < 35; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = 18 + Math.random() * 25 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+    }
+}
+
+/* Hayır’a basınca ekranı hafif titreştir */
+function shake() {
+    document.body.style.animation = "shake 0.2s";
+    setTimeout(() => {
+        document.body.style.animation = "";
+    }, 200);
+
+    let style = document.createElement("style");
+    style.innerHTML = `
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-6px); }
+            100% { transform: translateX(0); }
+        }
+    `;
+    document.head.appendChild(style);
+}
+</script>
+
+</body>
+</html>
