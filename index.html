@@ -15,6 +15,7 @@
         align-items: center;
         overflow: hidden;
         background: #ff9ecb;
+        user-select: none;
     }
 
     /* Arka plan fotoğrafı */
@@ -39,6 +40,25 @@
     @keyframes glow {
         from { opacity: 0.5; }
         to { opacity: 0.9; }
+    }
+
+    /* İsimler */
+    .names {
+        position: fixed;
+        top: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 26px;
+        color: #fff0f7;
+        text-shadow: 0 0 15px #ff4fa6;
+        font-weight: bold;
+        z-index: 10;
+        animation: pulseName 2.5s infinite alternate;
+    }
+
+    @keyframes pulseName {
+        from { transform: scale(1); }
+        to { transform: scale(1.05); }
     }
 
     .container {
@@ -87,6 +107,7 @@
         margin: 10px;
         transition: 0.25s;
         font-weight: bold;
+        position: relative;
     }
 
     #yesBtn {
@@ -106,11 +127,7 @@
         color: #7a004f;
         border: 2px solid #ff2a8a;
         box-shadow: 0 0 10px rgba(255,100,150,0.4);
-    }
-
-    #noBtn:hover {
-        background: #ffcae1;
-        transform: scale(1.05);
+        position: absolute;
     }
 
     #msg {
@@ -152,6 +169,8 @@
 <div class="bg"></div>
 <div class="overlay"></div>
 
+<div class="names">💗 CAN & O 💗</div>
+
 <div class="container">
     <h1>Özür Dilerim Aşkım… 💔</h1>
     <div class="sub">Seni istemeden kırdım… Affeder misin? 💗</div>
@@ -165,10 +184,19 @@
 <script>
 let noClicks = 0;
 
+/* EVET */
 document.getElementById("yesBtn").onclick = function () {
     document.getElementById("msg").innerHTML =
-        "O zaman… Yazışmaya devam edelim birtanem ❤💋 Seni çok seviyorum.";
+        "Tamam o zaman… Yazışmaya devam edelim birtanem ❤💋 Seni çok seviyorum.";
     rainHearts();
+};
+
+/* HAYIR */
+let noBtn = document.getElementById("noBtn");
+
+noBtn.onmouseover = function () {
+    noBtn.style.left = Math.random() * 60 + "vw";
+    noBtn.style.top = Math.random() * 60 + "vh";
 };
 
 document.getElementById("noBtn").onclick = function () {
@@ -188,13 +216,11 @@ document.getElementById("noBtn").onclick = function () {
 
     document.getElementById("msg").innerHTML =
         messages[Math.min(noClicks - 1, messages.length - 1)];
-
-    shake();
 };
 
 /* Kalp yağmuru */
 function rainHearts() {
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 40; i++) {
         let heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML = "💗";
@@ -206,26 +232,6 @@ function rainHearts() {
             heart.remove();
         }, 4000);
     }
-}
-
-/* Hayır’a basınca ekranı hafif titreştir */
-function shake() {
-    document.body.style.animation = "shake 0.2s";
-    setTimeout(() => {
-        document.body.style.animation = "";
-    }, 200);
-
-    let style = document.createElement("style");
-    style.innerHTML = `
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            50% { transform: translateX(6px); }
-            75% { transform: translateX(-6px); }
-            100% { transform: translateX(0); }
-        }
-    `;
-    document.head.appendChild(style);
 }
 </script>
 
